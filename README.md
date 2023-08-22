@@ -1,2 +1,2 @@
-# test-dto
+# HTTP messages for JSON-RPC
 Test

@@ -1,0 +1,25 @@
+{
+  "name": "alexvenga/test-dto",
+  "description": "HTTP message for JSON-RPC",
+  "type": "library",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex",
+      "email": "alex.visualideas@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlexVenga\\TestDTO\\": "src/"
+    }
+  },
+  "scripts": {
+  }
+}
