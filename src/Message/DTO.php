@@ -6,7 +6,6 @@ use AlexVenga\TestDTO\Interfaces\Serializable;
 
 class DTO implements Serializable
 {
-
     protected array $data = [];
 
     public function serialize(): string

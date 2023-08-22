@@ -2,14 +2,13 @@
 
 namespace AlexVenga\TestDTO;
 
-use AlexVenga\TestDTO\Message\DTO;
+use AlexVenga\TestDTO\Interfaces\Serializable;
 use AlexVenga\TestDTO\Message\Event;
 use AlexVenga\TestDTO\Message\Meta;
 use AlexVenga\TestDTO\Message\Payload;
 
-class Message extends DTO
+class Message implements Serializable
 {
-
     protected ?Meta $meta;
 
     protected ?Event $event;
@@ -47,6 +46,18 @@ class Message extends DTO
     public function getPayload(): ?Payload
     {
         return $this->payload;
+    }
+
+    public function serialize(): string
+    {
+        var_dump('serialize');
+        exit;
+    }
+
+    public static function deserialize(null|string|array $serialized): static
+    {
+        var_dump('serialize');
+        exit;
     }
 
 }
