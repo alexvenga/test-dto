@@ -24,6 +24,7 @@ class Message implements Serializable
         if (!is_null($meta)) {
             $this->meta = $meta;
         }
+
         return $this;
     }
 
@@ -37,6 +38,7 @@ class Message implements Serializable
         if (!is_null($event)) {
             $this->event = $event;
         }
+
         return $this;
     }
 
@@ -50,6 +52,7 @@ class Message implements Serializable
         if (!is_null($payload)) {
             $this->payload = $payload;
         }
+
         return $this;
     }
 

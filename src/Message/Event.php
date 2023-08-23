@@ -11,6 +11,7 @@ class Event extends DTOWithData
     public function setName(?string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 

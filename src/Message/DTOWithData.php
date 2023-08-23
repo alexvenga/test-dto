@@ -15,6 +15,7 @@ class DTOWithData implements Serializable
     {
         if (is_null($key)) {
             $this->data = [];
+
             return $this;
         }
 
@@ -23,6 +24,7 @@ class DTOWithData implements Serializable
                 throw new \InvalidArgumentException('Data array must be associative');
             }
             $this->data = $key;
+
             return $this;
         }
 
