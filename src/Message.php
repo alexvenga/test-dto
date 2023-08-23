@@ -21,9 +21,7 @@ class Message implements Serializable
 
     public function setMeta(?Meta $meta = null): static
     {
-        if (!is_null($meta)) {
-            $this->meta = $meta;
-        }
+        $this->meta = $meta;
 
         return $this;
     }
@@ -35,9 +33,7 @@ class Message implements Serializable
 
     public function setEvent(?Event $event = null): static
     {
-        if (!is_null($event)) {
-            $this->event = $event;
-        }
+        $this->event = $event;
 
         return $this;
     }
@@ -49,9 +45,7 @@ class Message implements Serializable
 
     public function setPayload(?Payload $payload = null): static
     {
-        if (!is_null($payload)) {
-            $this->payload = $payload;
-        }
+        $this->payload = $payload;
 
         return $this;
     }
