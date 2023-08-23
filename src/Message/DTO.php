@@ -3,26 +3,24 @@
 namespace AlexVenga\TestDTO\Message;
 
 use AlexVenga\TestDTO\Interfaces\Serializable;
+use AlexVenga\TestDTO\Traits\HasJsonSerialize;
+use JsonSerializable;
 
-class DTO implements Serializable
+class DTO implements Serializable, JsonSerializable
 {
+    use HasJsonSerialize;
+
     protected array $data = [];
 
-    public function serialize(): string
-    {
-        var_dump('serialize');
-        exit;
-    }
 
-    public static function deserialize(null|string|array $serialized): static
+    public function setData(string $key, mixed $value): static
     {
-        var_dump('serialize');
-        exit;
-    }
+        if (is_resource($value)) {
+            throw new \InvalidArgumentException('$value can`t be resource');
+        }
 
-    public function setData(string|array|Serializable $key, mixed $value): static
-    {
-        //$this->data = $data;
+        $this->data[$key] = $value;
+
         return $this;
     }
 
@@ -31,4 +29,19 @@ class DTO implements Serializable
         return $this->data;
     }
 
+    public function serialize(int $flags = 0, int $depth = 512): string
+    {
+        $serializable = [
+            'className' => static::class,
+            'data' => $this->data
+        ];
+
+        return json_encode($serializable, $flags, $depth);
+    }
+
+    public static function deserialize(?string $serialized = null): static
+    {
+        var_dump('deserialize');
+        exit;
+    }
 }

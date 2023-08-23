@@ -6,14 +6,18 @@ use AlexVenga\TestDTO\Interfaces\Serializable;
 use AlexVenga\TestDTO\Message\Event;
 use AlexVenga\TestDTO\Message\Meta;
 use AlexVenga\TestDTO\Message\Payload;
+use AlexVenga\TestDTO\Traits\HasJsonSerialize;
 
 class Message implements Serializable
 {
-    protected ?Meta $meta;
+    use HasJsonSerialize;
 
-    protected ?Event $event;
-
-    protected ?Payload $payload;
+    public function __construct(
+        protected ?Meta $meta = null,
+        protected ?Event $event = null,
+        protected ?Payload $payload = null
+    ) {
+    }
 
     public function setMeta(?Meta $meta): static
     {
@@ -23,7 +27,7 @@ class Message implements Serializable
 
     public function getMeta(): ?Meta
     {
-        return $this->meta;
+        return $this->meta ?? $this->meta = new Meta();
     }
 
     public function setEvent(?Event $event): static
@@ -34,7 +38,7 @@ class Message implements Serializable
 
     public function getEvent(): ?Event
     {
-        return $this->event;
+        return $this->event ?? $this->event = new Event();
     }
 
     public function setPayload(?Payload $payload): static
@@ -45,18 +49,31 @@ class Message implements Serializable
 
     public function getPayload(): ?Payload
     {
-        return $this->payload;
+        return $this->payload ?? $this->payload = new Payload();
     }
 
-    public function serialize(): string
+    public function serialize(int $flags = 0, int $depth = 512): string
     {
-        var_dump('serialize');
-        exit;
+        $serializable = ['className' => static::class];
+
+        if (!empty($this->meta)) {
+            $serializable['meta'] = $this->meta;
+        }
+
+        if (!empty($this->event)) {
+            $serializable['event'] = $this->event;
+        }
+
+        if (!empty($this->payload)) {
+            $serializable['payload'] = $this->payload;
+        }
+
+        return json_encode($serializable, $flags, $depth);
     }
 
-    public static function deserialize(null|string|array $serialized): static
+    public static function deserialize(?string $serialized = null): static
     {
-        var_dump('serialize');
+        var_dump('deserialize');
         exit;
     }
 
