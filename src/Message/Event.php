@@ -2,7 +2,7 @@
 
 namespace AlexVenga\TestDTO\Message;
 
-class Event extends DTO
+class Event extends DTOWithData
 {
     public function __construct(protected ?string $name = null)
     {

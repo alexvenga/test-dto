@@ -2,6 +2,6 @@
 
 namespace AlexVenga\TestDTO\Message;
 
-class Meta extends DTO
+class Meta extends DTOWithData
 {
 }

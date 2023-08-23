@@ -5,7 +5,7 @@ namespace AlexVenga\TestDTO\Message;
 use AlexVenga\TestDTO\Interfaces\Serializable;
 use AlexVenga\TestDTO\Traits\HasSerialization;
 
-class DTO implements Serializable
+class DTOWithData implements Serializable
 {
     use HasSerialization;
 

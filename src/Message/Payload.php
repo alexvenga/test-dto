@@ -2,6 +2,6 @@
 
 namespace AlexVenga\TestDTO\Message;
 
-class Payload extends DTO
+class Payload extends DTOWithData
 {
 }
