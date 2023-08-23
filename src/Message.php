@@ -19,9 +19,11 @@ class Message implements Serializable
     ) {
     }
 
-    public function setMeta(?Meta $meta): static
+    public function setMeta(?Meta $meta = null): static
     {
-        $this->meta = $meta;
+        if (!is_null($meta)) {
+            $this->meta = $meta;
+        }
         return $this;
     }
 
@@ -30,9 +32,11 @@ class Message implements Serializable
         return $this->meta ?? $this->meta = new Meta();
     }
 
-    public function setEvent(?Event $event): static
+    public function setEvent(?Event $event = null): static
     {
-        $this->event = $event;
+        if (!is_null($event)) {
+            $this->event = $event;
+        }
         return $this;
     }
 
@@ -41,9 +45,11 @@ class Message implements Serializable
         return $this->event ?? $this->event = new Event();
     }
 
-    public function setPayload(?Payload $payload): static
+    public function setPayload(?Payload $payload = null): static
     {
-        $this->payload = $payload;
+        if (!is_null($payload)) {
+            $this->payload = $payload;
+        }
         return $this;
     }
 
@@ -73,8 +79,20 @@ class Message implements Serializable
 
     public static function deserialize(?string $serialized = null): static
     {
-        var_dump('deserialize');
-        exit;
+        if (empty($serialized)) {
+            return new static();
+        }
+
+        $unserialized = json_decode($serialized, true);
+
+        if (empty($unserialized['className'])) {
+            throw new \InvalidArgumentException('Unknown message class name');
+        }
+
+        return (new $unserialized['className']())
+            ->setMeta(isset($unserialized['meta']) ? Meta::deserialize($unserialized['meta']) : null)
+            ->setEvent(isset($unserialized['event']) ? Event::deserialize($unserialized['event']) : null)
+            ->setPayload(isset($unserialized['payload']) ? Payload::deserialize($unserialized['payload']) : null);
     }
 
 }

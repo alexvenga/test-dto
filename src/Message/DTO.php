@@ -12,7 +12,6 @@ class DTO implements Serializable, JsonSerializable
 
     protected array $data = [];
 
-
     public function setData(string $key, mixed $value): static
     {
         if (is_resource($value)) {
@@ -41,7 +40,24 @@ class DTO implements Serializable, JsonSerializable
 
     public static function deserialize(?string $serialized = null): static
     {
-        var_dump('deserialize');
-        exit;
+        if (empty($serialized)) {
+            return new static();
+        }
+
+        $unserialized = json_decode($serialized, true);
+
+        if (empty($unserialized['className'])) {
+            throw new \InvalidArgumentException('Unknown class name');
+        }
+
+        $object = new $unserialized['className']();
+
+        if (!empty($unserialized['data'])) {
+            foreach ($unserialized['data'] as $key => $value) {
+                $object->setData($key, $value); // TODO unserelize object of my classes
+            }
+        }
+
+        return $object;
     }
 }
