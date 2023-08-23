@@ -20,9 +20,15 @@
       "AlexVenga\\TestDTO\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "scripts": {
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.23"
+    "friendsofphp/php-cs-fixer": "^3.23",
+    "phpunit/phpunit": "^10"
   }
 }
